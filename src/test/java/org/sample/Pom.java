@@ -7,5 +7,7 @@ public class Pom {
 
 	@FindBy(name = "email")
 	public WebElement user;
+	
+	
 
 }
