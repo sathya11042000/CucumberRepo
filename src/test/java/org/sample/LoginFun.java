@@ -10,9 +10,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class LoginFun {
+public class LoginFun extends BaseClass {
 
 	WebDriver driver;
+	public static Pom p;
 
 	@Given("User launches the browser")
 	public void user_launches_the_browser() {
@@ -41,30 +42,34 @@ public class LoginFun {
 
 	@When("User enters valid username")
 	public void user_enters_valid_username() {
-	   WebElement e = driver.findElement(By.name("email"));
-	   e.sendKeys("sathya123@gmail.com");
+		p = new Pom();
+		WebElement e = p.getEmail();
+		e.sendKeys("sathya123@gmail.com");
+
+		driver.navigate().refresh();
+
+		p.getEmail();
+		e.sendKeys("sathya");
+
 	}
 
 	@When("User enters valid password")
 	public void user_enters_valid_password() {
-		WebElement e = driver.findElement(By.name("pass"));
-		   e.sendKeys("sathya123");
+		WebElement e = p.getPassWord();
+		e.sendKeys("sathya123");
 	}
 
 	@When("User clicks on login button")
 	public void user_clicks_on_login_button() {
 
 		// Locate login button and click
-		WebElement loginBtn = driver.findElement(By.xpath("//span[text()='Log in']"));
+		WebElement loginBtn = p.getLogIn();
 		loginBtn.click();
-		
-		
+
 	}
 
 	@Then("User should be navigated to homepage")
 	public void user_should_be_navigated_to_homepage() {
-		
-		
 
 		// Wait for page load (simple wait)
 		try {
